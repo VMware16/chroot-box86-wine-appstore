@@ -1,0 +1,14 @@
+#!/bin/bash
+echo 正在初始化
+rm -rf /tmp/chroot-box86-wine/
+mkdir /tmp/chroot-box86-wine/
+cd /tmp/chroot-box86-wine
+echo 正在安装相关依赖
+apt update 1>/dev/null 2>/dev/null
+apt install git g++ -y 1>/dev/null 2>/dev/null
+echo 正在下载最新版chroot-box86-wine应用商店源代码
+cd /tmp/chroot-box86-wine/&&git clone https://gitee.com/vmware16/chroot-box86-wine-appstore 1>/dev/null 2>/dev/null
+echo 正在编译源代码
+g++ /tmp/chroot-box86-wine/chroot-box86-wine-appstore/appstore.cpp -o /tmp/chroot-box86-wine/chroot-box86-wine-appstore/appstore -O2
+echo 运行应用商店
+/tmp/chroot-box86-wine/chroot-box86-wine-appstore/appstore
